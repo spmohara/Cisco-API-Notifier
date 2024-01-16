@@ -1,4 +1,54 @@
+"""
+A module to show message boxes in Windows-based Python applications.
+
+Author: Sean O'Hara
+"""
+
 import ctypes
+
+def show(title='My title', text='My text', button='OK', icon='ICONINFORMATION'):
+    """ Shows a message box based on the provided parameters.
+
+    Parameters
+    ----------
+    title: str
+        The title shown on message box.
+
+    text: str
+        The text shown on message box.
+
+    button: str
+        The button(s) shown on message box.
+            ``'OK'`` (default), ``'OKCANCEL'``, ``'ABORTRETRYIGNORE'``, ``'YESNOCANCEL'``,
+            ``'YESNO'``, ``'RETRYCANCEL'``, ``'CANCELTRYCONTINUE'``, ``'OKHELP'``
+
+    icon: str
+        The icon shown on message box.
+            ``'NOICON'``, ``'ICONSTOP'``, ``'ICONERROR'``, ``'ICONHAND'``, ``'ICONQUESTION'``,
+            ``'ICONEXCLAMATION'``, ``'ICONWARNING'``, ``'ICONINFORMATION'`` (default), ``'ICONASTERISK'``
+
+    Returns
+    -------
+    str
+        The button the user clicked on message box.
+            ``'OK'``, ``'CANCEL'``, ``'ABORT'``,  ``'RETRY'``,
+            ``'IGNORE'``,  ``'YES'``, ``'NO'``, ``'TRYAGAIN'``, ``'CONTINUE'``
+    """
+    return_values = {
+        1: 'OK',
+        2: 'CANCEL',
+        3: 'ABORT',
+        4: 'RETRY',
+        5: 'IGNORE',
+        6: 'YES',
+        7: 'NO',
+        10: 'TRYAGAIN',
+        11: 'CONTINUE'
+    }
+
+    btn_value, icon_value = _validate_param(title=title, text=text, button=button, icon=icon)
+    style = btn_value + icon_value
+    return return_values[ctypes.windll.user32.MessageBoxW(0, text, title, style)]
 
 def _validate_param(**kwargs):
     button_values = {
@@ -34,51 +84,6 @@ def _validate_param(**kwargs):
         else:
             raise ValueError('Invalid {} parameter specified'.format(key))
     return return_values
-
-def show(title='My title', text='My text', button='OK', icon='NOICON'):
-    """ Shows a message box based on the provided parameters.
-
-    Parameters
-    ----------
-    title: str
-        The title shown on message box.
-
-    text: str
-        The text shown on message box.
-
-    button: str
-        The button(s) shown on message box.
-            ``'OK'`` (default), ``'OKCANCEL'``, ``'ABORTRETRYIGNORE'``, ``'YESNOCANCEL'``,
-            ``'YESNO'``, ``'RETRYCANCEL'``, ``'CANCELTRYCONTINUE'``, ``'OKHELP'``
-
-    icon: str
-        The icon shown on message box.
-            ``'NOICON'`` (default), ``'ICONSTOP'``, ``'ICONERROR'``, ``'ICONHAND'``, ``'ICONQUESTION'``,
-            ``'ICONEXCLAMATION'``, ``'ICONWARNING'``, ``'ICONINFORMATION'``, ``'ICONASTERISK'``
-
-
-    Returns
-    -------
-    str
-        The button the user clicked on message box.
-            ``'OK'``, ``'CANCEL'``, ``'ABORT'``,  ``'RETRY'``,
-            ``'IGNORE'``,  ``'YES'``, ``'NO'``, ``'TRYAGAIN'``, ``'CONTINUE'``
-    """
-    return_values = {
-        1: 'OK',
-        2: 'CANCEL',
-        3: 'ABORT',
-        4: 'RETRY',
-        5: 'IGNORE',
-        6: 'YES',
-        7: 'NO',
-        10: 'TRYAGAIN',
-        11: 'CONTINUE'
-    }
-
-    btn_value, icon_value = _validate_param(title=title, text=text, button=button, icon=icon)
-    style = btn_value + icon_value
-    return return_values[ctypes.windll.user32.MessageBoxW(0, text, title, style)]
 
 if __name__ == '__main__':
     show()
