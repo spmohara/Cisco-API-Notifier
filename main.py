@@ -30,7 +30,8 @@ def main():
     # Check for new version and show message box
     version = float(versions.pop())  # last item is latest version
     if version > DRIVER_VERSION:  # if new version found
-        btn_select = mbox.show(title=MBOX_TITLE, text=f'New RoomOS {version} API found', button='OKCANCEL')
+        text = f'New RoomOS {version} API found'
+        btn_select = mbox.show(title=MBOX_TITLE, text=text, button='OKCANCEL')
         if btn_select == 'OK':  # if OK button selected
             webbrowser.open(URL)  # open API webpage
     else:
