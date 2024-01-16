@@ -24,13 +24,18 @@ Upon running the script file, one of the following message boxes will appear:
 - This means no API documentation was found on the page at all.
 - Selecting the **OK** button will terminate the program.
 
+#### If driver version is invalid:
+![Invalid driver version](images/Invalid%20driver%20version.png)
+- This means the driver version provided is invalid (must be float type).
+- Selecting the **OK** button will terminate the program.
+
 #### If webpage is unreachable:
 ![Error 404 Not Found](images/Error%20404%20Not%20Found.png)
 - This message will vary depending on which specific HTTP error occurred.
 - Selecting the **OK** button will terminate the program.
 
 # Dependencies
-- Python 3.x
+- Python 3.6 or above
 - requests 2.31.0
 
 # License
