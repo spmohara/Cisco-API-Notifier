@@ -37,6 +37,7 @@ Upon running the script file, one of the following message boxes will appear:
 # Dependencies
 - Python 3.6 or above
 - requests 2.31.0
+- Windows
 
 # License
 Licensed under the [MIT License](LICENSE)
