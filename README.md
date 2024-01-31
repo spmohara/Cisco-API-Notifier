@@ -4,7 +4,7 @@
 This project was created to automate a work task of mine to ensure our [Extron](https://www.extron.com/) device drivers for [Cisco](https://www.cisco.com/) video conferencing systems stay up-to-date with the latest API documentation. This is done by executing a script file on a weekly basis, via Windows Task Scheduler, to search the following Cisco [API reference page](https://www.cisco.com/c/en/us/support/collaboration-endpoints/spark-room-kit-series/products-command-reference-list.html) to see if new documentation is available by comparing the latest API version found to the version the current driver uses. This project serves as a substitute for not be able to receive API update notifications directly from Cisco since both a customer account and a paid subscription are required for these services.
 
 # Description
-A simple web scraper in Python used to automatically check and notify a user if new documentation is available from a specific webpage.
+A simple web scraper in Python leveraging automation to check and notify a user if new documentation is available from a specific webpage.
 
 # Usage
 Upon running the script file, one of the following message boxes will appear:
