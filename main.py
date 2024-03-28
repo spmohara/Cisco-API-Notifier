@@ -3,6 +3,7 @@ import sys
 import re
 import mbox
 import webbrowser
+from packaging import version
 
 DRIVER_VERSION = 11.9
 URL = 'https://www.cisco.com/c/en/us/support/collaboration-endpoints/spark-room-kit-series/products-command-reference-list.html'
@@ -23,14 +24,14 @@ def main():
 
     # Parse webpage text and find all RoomOS API versions (if any)
     regex = re.compile('API Reference Guide \(RoomOS ([0-9]+\.[0-9]+)\)')
-    versions = sorted(set(re.findall(regex, page_text)))
+    versions = set(re.findall(regex, page_text))
     if not versions:
         show_error('No RoomOS versions found')
 
     # Check for new version and show message box
-    version = float(versions.pop())  # last item is latest version
-    if version > DRIVER_VERSION:  # if new version found
-        text = f'New RoomOS {version} API found'
+    latest_version = max(versions, key=version.parse)  # get latest version
+    if version.parse(latest_version) > version.parse(str(DRIVER_VERSION)):  # if new version found
+        text = f'New RoomOS {latest_version} API found'
         btn_select = mbox.show(title=MBOX_TITLE, text=text, button='OKCANCEL')
         if btn_select == 'OK':  # if OK button selected
             webbrowser.open(URL)  # open API webpage
