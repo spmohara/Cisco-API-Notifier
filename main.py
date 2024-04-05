@@ -5,7 +5,7 @@ import mbox
 import webbrowser
 from packaging import version
 
-DRIVER_VERSION = 11.9
+DRIVER_VERSION = 11.14
 URL = 'https://www.cisco.com/c/en/us/support/collaboration-endpoints/spark-room-kit-series/products-command-reference-list.html'
 MBOX_TITLE = 'Cisco API Notifier'
 
